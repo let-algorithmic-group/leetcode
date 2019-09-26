@@ -5,16 +5,6 @@ class ListNode:
         self.next = None
 
 
-def append(l, node):
-    if not l:
-        return node
-    cur = l
-    while cur.next is not None:
-        cur = cur.next
-    cur.next = node
-    return l
-
-
 class Solution:
     def mergeTwoLists(self, l1: ListNode, l2: ListNode) -> ListNode:
         if not l1:
@@ -22,23 +12,24 @@ class Solution:
         if not l2:
             return l1
 
-        new = None
+        new = ListNode(-1)
+        cur = new
         while l1 and l2:
-
             if l1.val < l2.val:
                 node = ListNode(l1.val)
                 l1 = l1.next
             else:
                 node = ListNode(l2.val)
                 l2 = l2.next
-            new = append(new, node)
+            cur.next = node
+            cur = cur.next
 
         if l1:
-            new = append(new, l1)
+            cur.next = l1
         else:
-            new = append(new, l2)
+            cur.next = l2
 
-        return new
+        return new.next
 
 
 if __name__ == '__main__':
