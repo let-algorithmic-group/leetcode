@@ -3,9 +3,13 @@ package main
 
 import (
 	"fmt"
+	"runtime"
 )
 
 func main() {
+	stats := &runtime.MemStats{}
+	runtime.ReadMemStats(stats)
+	fmt.Println(stats.Mallocs, stats.TotalAlloc)
 	l1 := ListNode{
 		Val: 4,
 		Next: &ListNode{
@@ -16,6 +20,7 @@ func main() {
 			},
 		},
 	}
+	fmt.Println(stats.Mallocs, stats.TotalAlloc)
 	l2 := ListNode{
 		Val: 4,
 		Next: &ListNode{
@@ -26,7 +31,9 @@ func main() {
 			},
 		},
 	}
+
 	ret := sortList(&l1)
+	fmt.Println(stats.Mallocs, stats.TotalAlloc)
 	fmt.Println(ret.toString())
 
 	fmt.Println("l1:", l1.toString())
@@ -40,6 +47,7 @@ type ListNode struct {
 }
 
 func mergeTwoLists(l1 *ListNode, l2 *ListNode) *ListNode {
+
 	l1Index := l1
 	l2Index := l2
 	var ret ListNode
@@ -96,24 +104,28 @@ func sortList(head *ListNode) *ListNode {
 	var list []*ListNode
 
 	next := head
+	var tmp *ListNode
 	for {
 		if nil == next {
 			break
 		}
-		var node ListNode
-		node.Val = next.Val
-		list = append(list, &node)
+		//var node ListNode
+		//node.Val = next.Val
+		list = append(list, next)
+		tmp = next
 		next = next.Next
+		tmp.Next = nil
 	}
 	endIndex := len(list) - 1
 	if endIndex < 0 {
 		return nil
 	}
+	index := 0
 	for {
 		if endIndex <= 0 {
 			break
 		}
-		index := 0
+		index = 0
 		for {
 			if index > endIndex {
 				break

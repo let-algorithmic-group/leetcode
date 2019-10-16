@@ -8,7 +8,7 @@ import (
 func main() {
 	a := 31
 	fmt.Println(findNthDigit(a))
-	fmt.Println("findNthDigit")
+	fmt.Println(int64(math.Pow(2, 32)))
 }
 
 func findNthDigit(n int) int {
