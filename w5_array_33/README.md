@@ -1,4 +1,6 @@
-## 33. 搜索旋转排序数组
+## 33. 搜索旋转排序数组(数组2/2)
+https://leetcode-cn.com/problems/search-in-rotated-sorted-array/
+
 
 假设按照升序排序的数组在预先未知的某个点上进行了旋转。
 
